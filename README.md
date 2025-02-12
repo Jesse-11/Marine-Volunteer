@@ -1,2 +1,4 @@
 # Volunteer-Event-Webpage
-Using this repository as a "practice" field for a group project. To test layouts and designs before moving over. However, if possible when project is completed this repository will be made into its own stand-alone web-app
+This project was done during university. The repository was privatised on the university server and is not viewable. I tried to copy the content over as functional and doable as possible.
+
+If bugs or things persist i will attempt to fix. However certain features are now inaccesible due to university software. 
