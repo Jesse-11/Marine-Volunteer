@@ -2,16 +2,16 @@
   "name": "volunteer-event-webpage",
   "version": "1.0.0",
   "description": "Using this repository as a \"practice\" field for a group project. To test layouts and designs before moving over. However, if possible when project is completed this repository will be made into its own stand-alone web-app",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
+    "build": "node scripts/build-static.js",
     "start": "node ./bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
     "express": "^4.21.2",
     "express-session": "^1.18.1",

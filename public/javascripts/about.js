@@ -8,24 +8,20 @@ new Vue ({
             {
                 id: 1,
                 name: "Jesse Hoppo",
-                bio: "Jesse has over 20 years of experience in marine biology and education. He is the founder and has a passion for teaching others.",
-                role: "CEO",
-                photo: "https://via.placeholder.com/100"
-
+                bio: "Jesse leads education partnerships and turns field knowledge into volunteer programs that are practical, welcoming, and measurable.",
+                role: "Founder"
             },
             {
                 id: 2,
                 name: "Arthur Perets",
-                bio: "Arthur has a high level of experince in many relevant fields including marine biology, buisness and events. The face of [company name]",
-                role: "CTO",
-                photo: "https://via.placeholder.com/100"
+                bio: "Arthur coordinates events, partner relationships, and coastal action days so volunteers can move from interest to impact quickly.",
+                role: "Events Lead"
             },
             {
                 id: 3,
                 name: "Loay Abdel.",
-                bio: "Loay is a past vet with decades of experince and has changed his focus to marine life. He focuses on supportining the animals we save.",
-                role: "COO",
-                photo: "https://via.placeholder.com/100"
+                bio: "Loay brings animal welfare experience to rescue support, rehabilitation logistics, and volunteer training across marine care projects.",
+                role: "Care Lead"
             }
         ]
     },
@@ -69,6 +65,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 });
-
 
 

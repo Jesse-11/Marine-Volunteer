@@ -1,12 +1,10 @@
 
 const db = require('../databases/db'); // Assuming this is the proper db module path in our final repository
-const bcrypt = require('bcrypt');
 
 
 exports.signup = async (req, res) => {
     const { username, password, email } = req.body;
     try {
-        // Removed bcrypt hashing and using plain password (not recommended for production)
         await db.query('INSERT INTO Users (username, password, email, is_admin, created_at) VALUES (?, ?, ?, false, NOW())', [username, password, email]);
         res.status(201).send('User registered');
     } catch (error) {
@@ -20,7 +18,8 @@ exports.login = async (req, res) => {
         const result = await db.query('SELECT * FROM Users WHERE username = ? AND password = ?', [username, password]);
         if (result.length > 0) {
             req.session.user = result[0]; // Set user in session
-            res.send('Logged in successfully');
+            const { password: _password, ...user } = result[0];
+            res.json({ message: 'Logged in successfully', user });
         } else {
             res.status(401).send('Invalid credentials');
         }
@@ -50,12 +49,11 @@ exports.getUserInfo = async (req, res) => {
 
 exports.updateUserInfo = async (req, res) => {
     const { id } = req.params;
-    const { email } = req.body;
+    const { email, username } = req.body;
     try {
-        await db.query('UPDATE Users SET email = ? WHERE user_id = ?', [email, id]);
+        await db.query('UPDATE Users SET email = ?, username = ? WHERE user_id = ?', [email, username, id]);
         res.send('User information updated');
     } catch (error) {
         res.status(500).send('Error updating user information');
     }
 };
-

@@ -1,60 +1,79 @@
+function showAuthMessage(title, message, type = 'error') {
+    document.querySelectorAll('.auth-toast').forEach(toast => toast.remove());
+
+    const toast = document.createElement('div');
+    toast.className = `auth-toast ${type}`;
+    toast.setAttribute('role', 'status');
+    toast.innerHTML = `
+        <button type="button" aria-label="Dismiss message">&times;</button>
+        <strong>${title}</strong>
+        <p>${message}</p>
+    `;
+
+    toast.querySelector('button').addEventListener('click', () => toast.remove());
+    document.body.appendChild(toast);
+    window.setTimeout(() => toast.remove(), type === 'success' ? 2600 : 5200);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const emailLoginButton = document.getElementById('email-btn');
     const emailLoginModal = document.getElementById('emailLoginModal');
     const closeModal = document.querySelector('.close');
+    const loginForm = document.getElementById('loginForm');
 
-    // Open the modal when the email login button is clicked
+    if (!emailLoginButton || !emailLoginModal || !closeModal || !loginForm) {
+        return;
+    }
+
     emailLoginButton.addEventListener('click', function() {
-        emailLoginModal.style.display = 'flex'; // Change to 'flex' to show and center the modal
+        emailLoginModal.style.display = 'flex';
     });
 
-    // Close the modal when the close button (x) is clicked
     closeModal.addEventListener('click', function() {
         emailLoginModal.style.display = 'none';
     });
 
-    // Close the modal when clicking outside of it
     window.onclick = function(event) {
         if (event.target == emailLoginModal) {
             emailLoginModal.style.display = 'none';
         }
     };
 
-    // Handle the form submission
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the form from submitting in the traditional way
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault();
 
-        const username = document.getElementById('username').value;
+        const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value;
 
-        const loginData = {
-            username: username,
-            password: password
-        };
+        if (!username || !password) {
+            showAuthMessage('Missing login details', 'Enter both your username and password to continue.');
+            return;
+        }
 
         fetch('/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(loginData),
+            body: JSON.stringify({ username, password }),
         })
-        .then(response => {
-            if (response.ok) {
-                return response.text();
-            } else {
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+
                 throw new Error('Failed to login');
-            }
-        })
-        .then(data => {
-            console.log(data);
-            localStorage.setItem('user', JSON.stringify(data)); // Store the username in localStorage
-            emailLoginModal.style.display = 'none'; // Close the modal on successful login
-            window.location.href = '/';
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-            // Show error message to the user, e.g., invalid credentials
-        });
+            })
+            .then(data => {
+                localStorage.setItem('user', JSON.stringify(data.user));
+                emailLoginModal.style.display = 'none';
+                showAuthMessage('Welcome back', 'You are signed in. Redirecting to the home page.', 'success');
+                window.setTimeout(() => {
+                    window.location.href = '/';
+                }, 700);
+            })
+            .catch(() => {
+                showAuthMessage('Login failed', 'Check your username and password, then try again.');
+            });
     });
 });

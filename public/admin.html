@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page with Vue</title>
+    <title>Admin Dashboard | Tidekeepers Collective</title>
     <link rel="stylesheet" href="stylesheets/admin.css">
 </head>
 <body>
     <div id="app">
         <div class="sticky-nav">
             <div class="logo">
-                <a href="index.html"><img src="images/main-page/logo-placeholder.png" alt="AMAF Brand Logo"></a>
+                <a href="index.html"><img src="images/main-page/MarineVolunteering.jpg" alt="Tidekeepers Collective logo"></a>
             </div>
             <div id="menu-toggle" class="menu-toggle" @click="toggleMenu">
                 <span></span>
@@ -26,7 +26,7 @@
             </ul>
         </div>
         <div class="adminPage">
-            <h1>Admin Page</h1>
+            <h1>Admin Dashboard</h1>
 
             <div class="add-user">
                 <h2>Add New User</h2>
@@ -80,7 +80,10 @@
         <!-- Add Axios for AJAX requests -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <!-- Add the main script file -->
-        <script src="javascripts/admin.js"></script> <!-- Ensure the path is correct -->
+        <script src="javascripts/navigation.js"></script>
+    <script src="javascripts/admin.js"></script>
     </div>
+    <script src="javascripts/site-effects.js"></script>
+
 </body>
 </html>

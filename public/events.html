@@ -3,27 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Volunteer Events | Tidekeepers Collective</title>
     <link rel="stylesheet" href="stylesheets/events.css">
 </head>
 <body>
     <div id="app">
-        <div class="static-header">
-            <header>
-                <div class="static-text">
-                    <p>  Volunteer Appreciation Day! Join us in celebrattion of our volunteers!  </p>
-                    <p>     Date: Saturday, May 25th </p>
-                    <p> Time: 11:00 AM to 3:00 PM </p>
-                    <p> Location: Harmony Park Community Center, Adelaide</p>
-                </div>
-            </header>
-        </div>
-
         <div class="sticky-nav">
             <div class="logo">
-                <a href="index.html"><img src="images/main-page/logo-placeholder.png" alt="AMAF Brand Logo"></a>
+                <a href="index.html"><img src="images/main-page/MarineVolunteering.jpg" alt="Tidekeepers Collective logo"></a>
             </div>
-            <div id="menu-toggle" class="menu-toggle" @click="toggleMenu">
+            <div id="menu-toggle" class="menu-toggle">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -37,157 +26,145 @@
             </ul>
         </div>
 
-
-        <div class="banner">
-            <div class="banner-image">
-                <img src="images/event-navigation-page/websitebanner.jpg" img alt="Banner">
-            </div>
-                <div class="banner-header">
-                    <h1>Help save our oceans</h1>
-                    <p>
-                    Join our Marine Volunteer Organization and become a vital part of preserving our oceans' health and biodiversity.Together, let's make waves of positive change and protect our planet's most precious resource – the ocean.
-                    </p>
+        <main>
+            <section class="events-hero">
+                <div class="events-hero-copy">
+                    <p class="eyebrow">Volunteer calendar</p>
+                    <h1>Find a simple way to help the coast this month.</h1>
+                    <p>Browse upcoming cleanup, care, education, and restoration events across Australia. Pick a state, choose a focus, and join the next practical action day.</p>
+                    <div class="event-actions">
+                        <a class="primary-link" href="eventpage.html">View upcoming events</a>
+                        <a class="secondary-link" href="#host-event">Host an event</a>
+                    </div>
                 </div>
-            </div>
-            <div class="event-creation">
-                <h2>Create New Event</h2>
+                <div class="events-hero-media">
+                    <img src="images/event-navigation-page/websitebanner.jpg" alt="Volunteers walking along a coastline">
+                </div>
+            </section>
+
+            <section class="events-panel" aria-labelledby="event-filters-heading">
+                <div class="section-intro">
+                    <p class="eyebrow">Explore by area</p>
+                    <h2 id="event-filters-heading">Quick filters</h2>
+                </div>
+                <div class="filter-row" aria-label="State filters">
+                    <a href="eventpage.html">South Australia</a>
+                    <a href="eventpage.html">New South Wales</a>
+                    <a href="eventpage.html">Queensland</a>
+                    <a href="eventpage.html">Victoria</a>
+                    <a href="eventpage.html">Western Australia</a>
+                    <a href="eventpage.html">Tasmania</a>
+                    <a href="eventpage.html">Northern Territory</a>
+                    <a href="eventpage.html">ACT</a>
+                </div>
+                <div class="filter-row muted" aria-label="Event type filters">
+                    <a href="eventpage.html">Cleanup</a>
+                    <a href="eventpage.html">Wildlife care</a>
+                    <a href="eventpage.html">Reef restoration</a>
+                    <a href="eventpage.html">Education</a>
+                </div>
+            </section>
+
+            <section class="event-list" aria-labelledby="featured-events-heading">
+                <div class="section-intro">
+                    <p class="eyebrow">Featured opportunities</p>
+                    <h2 id="featured-events-heading">Upcoming volunteer picks</h2>
+                </div>
+
+                <article class="event-row">
+                    <div class="event-date">
+                        <span>25</span>
+                        <small>May</small>
+                    </div>
+                    <div>
+                        <h3>Adelaide Shoreline Reset</h3>
+                        <p>Morning cleanup and debris audit along a high-impact metro beach.</p>
+                    </div>
+                    <div class="event-meta">
+                        <span>South Australia</span>
+                        <span>Cleanup</span>
+                    </div>
+                    <a href="eventpage.html">Details</a>
+                </article>
+
+                <article class="event-row">
+                    <div class="event-date">
+                        <span>02</span>
+                        <small>Jun</small>
+                    </div>
+                    <div>
+                        <h3>Reef Watch Field Morning</h3>
+                        <p>Help collect simple reef-health observations with trained coordinators.</p>
+                    </div>
+                    <div class="event-meta">
+                        <span>Queensland</span>
+                        <span>Research</span>
+                    </div>
+                    <a href="eventpage.html">Details</a>
+                </article>
+
+                <article class="event-row">
+                    <div class="event-date">
+                        <span>09</span>
+                        <small>Jun</small>
+                    </div>
+                    <div>
+                        <h3>Marine Care Supply Sort</h3>
+                        <p>Prepare rescue, transport, and rehabilitation supplies for wildlife care teams.</p>
+                    </div>
+                    <div class="event-meta">
+                        <span>Victoria</span>
+                        <span>Wildlife care</span>
+                    </div>
+                    <a href="eventpage.html">Details</a>
+                </article>
+            </section>
+
+            <section class="event-creation" id="host-event">
+                <div class="section-intro">
+                    <p class="eyebrow">Community-led action</p>
+                    <h2>Create a new event</h2>
+                </div>
 
                 <form action="#" class="sign-up-form">
-                    <label for="title">Event Title:</label><br>
-                    <input type="text" id="title" name="title" required><br><br>
+                    <label for="title">Event title</label>
+                    <input type="text" id="title" name="title" required>
 
-                    <label for="description">Event Description:</label><br>
-                    <textarea id="description" name="description" rows="4" cols="50"></textarea><br><br>
+                    <label for="description">Event description</label>
+                    <textarea id="description" name="description" rows="4"></textarea>
 
-                    <label for="event_date">Event Date and Time:</label><br>
-                    <input type="datetime-local" id="event_date" name="event_date" required><br><br>
+                    <label for="event_date">Event date and time</label>
+                    <input type="datetime-local" id="event_date" name="event_date" required>
 
-                    <label for="org_id">Organization ID:</label><br>
-                    <input type="number" id="org_id" name="org_id" required><br><br>
+                    <label for="org_id">Organization ID</label>
+                    <input type="number" id="org_id" name="org_id" required>
 
-                    <input type="submit" value="Create Event">
+                    <input type="submit" value="Create event">
                 </form>
-            </div>
-
-
-
-
-        <div class="upcoming-events">
-            <hr>
-
-            <div class="heading-text">
-                <h1>Choose your state</h1>
-            </div>
-
-            <div class="card-section-events">
-
-
-                <div class="card">
-                    <img src="images/event-navigation-page/sa.svg" img alt="South Australia">
-                    <p>South Australia</p>
-                    <button type="button">Learn More</button>
-                </div>
-
-
-                <div class="card">
-                    <img src="images/event-navigation-page/nsw.png" img alt="New South Wales">
-                    <p>New South Wales</p>
-                    <button type="button">Learn More</button>
-
-                </div>
-
-                <div class="card">
-                    <img src="images/event-navigation-page/qld.png" img alt="Queensland">
-                    <p>Queensland</p>
-                    <button type="button">Learn More</button>
-                </div>
-
-
-            </div>
-
-        </div>
-
-        <div class="upcoming-events">
-
-            <div class="card-section-events">
-
-
-                <div class="card">
-                    <img src="images/event-navigation-page/tas.png" img alt="Tasmania">
-                    <p>Tasmania</p>
-                    <button type="button">Learn More</button>
-                </div>
-
-
-                <div class="card">
-                    <img src="images/event-navigation-page/vic.svg" img alt="Victoria">
-                    <p>Victoria </p>
-                    <button type="button">Learn More</button>
-
-                </div>
-
-                <div class="card">
-                    <img src="images/event-navigation-page/wa.svg" img alt="Western Australia">
-                    <p>Western Australia</p>
-                    <button type="button">Learn More</button>
-                </div>
-
-
-            </div>
-
-            <div class="card-section-events">
-
-
-                <div class="card">
-                    <img src="images/event-navigation-page/nt.svg" img alt="Northern Territory">
-                    <p>Northern Territory </p>
-                    <button type="button">Learn More</button>
-                </div>
-
-
-                <div class="card">
-                    <img src="images/event-navigation-page/act.png" img alt="Australia Capital Territory">
-                    <p>Australia Capital Territory</p>
-                    <button type="button">Learn More</button>
-
-                </div>
-
-
-                <hr>
-
-            </div>
-        </div>
+            </section>
+        </main>
 
         <footer>
             <div class="footer-section">
                 <div class="contact-us">
                     <h1>Contact Us</h1>
-                    <p>📞 08 8231 6931</p>
-                    <p>📧 North Terrace, Adeliade</p>
+                    <p>08 8231 6931</p>
+                    <p>North Terrace, Adelaide</p>
                 </div>
 
                 <div class="brand">
-                    <img class="logo" src="images/main-page/logo-placeholder.png" alt="Logo">
+                    <img class="logo" src="images/main-page/MarineVolunteering.jpg" alt="Tidekeepers Collective logo">
                     <div class="social-media">
                         <img src="images/main-page/facebook-log-in.png" alt="Facebook Icon">
                         <img src="images/main-page/x-logo.png" alt="Twitter Icon">
                         <img src="images/main-page/instagram-logo.webp" alt="Instagram Icon">
                     </div>
                 </div>
-
-
             </div>
         </footer>
-
-
-
-
-
-
-
-
-
     </div>
-        <script src="javascripts/events.js" defer></script>
+    <script src="javascripts/events.js" defer></script>
+    <script src="javascripts/site-effects.js"></script>
+
 </body>
 </html>

@@ -1,57 +1,71 @@
-document.querySelector('.sign-up-form').addEventListener('submit', function(event) {
-    if(!validateSignupForm()) {
-        event.preventDefault();
-        alert('Please fill in all fields correctly');
-    }
-});
+function showAuthMessage(title, message, type = 'error') {
+    document.querySelectorAll('.auth-toast').forEach(toast => toast.remove());
+
+    const toast = document.createElement('div');
+    toast.className = `auth-toast ${type}`;
+    toast.setAttribute('role', 'status');
+    toast.innerHTML = `
+        <button type="button" aria-label="Dismiss message">&times;</button>
+        <strong>${title}</strong>
+        <p>${message}</p>
+    `;
+
+    toast.querySelector('button').addEventListener('click', () => toast.remove());
+    document.body.appendChild(toast);
+    window.setTimeout(() => toast.remove(), type === 'success' ? 2600 : 5200);
+}
 
 function validateSignupForm() {
-    const username = document.querySelector('#username').value;
-    const email = document.querySelector('#email').value;
+    const username = document.querySelector('#username').value.trim();
+    const email = document.querySelector('#email').value.trim();
     const password = document.querySelector('#password').value;
     const confirmPassword = document.querySelector('#confirm-password').value;
 
-    const errors = [];
-
-    //usrname validation
-    if (!username || username.trim.length < 3) {
-        alert('Username must be at least 3 characters long');
+    if (username.length < 3) {
+        showAuthMessage('Username is too short', 'Use at least 3 characters so other volunteers can recognise you.');
         return false;
     }
 
-    //email validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email || !emailPattern.test(email)) {
-        alert('Invalid email address');
+    if (!emailPattern.test(email)) {
+        showAuthMessage('Email needs another look', 'Enter a valid email address, for example volunteer@example.com.');
         return false;
     }
 
-    // Password validation
-    const passwordPattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
-    if (!password || !passwordPattern.test(password)) {
-        alert('Password must contain at least one number and one special character.');
+    const missingRules = [];
+    if (password.length < 8) missingRules.push('8 characters');
+    if (!/[0-9]/.test(password)) missingRules.push('1 number');
+    if (!/[!@#$%^&*]/.test(password)) missingRules.push('1 special character');
+
+    if (missingRules.length > 0) {
+        showAuthMessage('Password is not ready yet', `Please include ${missingRules.join(', ')}.`);
         return false;
     }
 
-    // Password confirmation validation
     if (password !== confirmPassword) {
-        alert('Password and password confirmation do not match.');
+        showAuthMessage('Passwords do not match', 'Re-enter your password confirmation so both fields are exactly the same.');
         return false;
     }
 
     return true;
-
 }
-
 
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.sign-up-form');
-    form.addEventListener('submit', async (event) => { // Make this function async
+    if (!form) {
+        return;
+    }
+
+    form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
+        if (!validateSignupForm()) {
+            return;
+        }
+
         const formData = {
-            username: document.getElementById('username').value,
-            email: document.getElementById('email').value,
+            username: document.getElementById('username').value.trim(),
+            email: document.getElementById('email').value.trim(),
             password: document.getElementById('password').value,
         };
 
@@ -61,18 +75,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData), // Use formData object
+                body: JSON.stringify(formData),
             });
 
             if (response.ok) {
-                alert('User registered successfully');
-                // redirect to login page
-                window.location.href = '/login';
+                showAuthMessage('Account created', 'Welcome to Tidekeepers Collective. Taking you to sign in now.', 'success');
+                window.setTimeout(() => {
+                    window.location.href = '/login';
+                }, 900);
             } else {
-                alert('Error registering user');
+                showAuthMessage('Could not create account', 'That username or email may already be in use. Try another one.');
             }
         } catch (error) {
-            alert('Error registering user');
+            showAuthMessage('Connection problem', 'We could not reach the signup service. Please try again in a moment.');
         }
     });
 });

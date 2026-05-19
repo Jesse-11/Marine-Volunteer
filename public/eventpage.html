@@ -3,27 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events Page</title>
+    <title>Upcoming Events | Tidekeepers Collective</title>
     <link rel="stylesheet" href="stylesheets/eventpage.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <div id="app">
-        <div class="static-header">
-            <header>
-                <div class="static-text">
-                    <p>  Volunteer Appreciation Day! Join us in celebration of our volunteers!  </p>
-                    <p>     Date: Saturday, May 25th </p>
-                    <p> Time: 11:00 AM to 3:00 PM </p>
-                    <p> Location: Harmony Park Community Center, Adelaide</p>
-                </div>
-            </header>
-        </div>
-
+    <div id="app" class="event-directory">
         <div class="sticky-nav">
             <div class="logo">
-                <a href="index.html"><img src="images/main-page/logo-placeholder.png" alt="AMAF Brand Logo"></a>
+                <a href="index.html"><img src="images/main-page/MarineVolunteering.jpg" alt="Tidekeepers Collective logo"></a>
             </div>
             <div id="menu-toggle" class="menu-toggle" @click="toggleMenu">
                 <span></span>
@@ -39,61 +28,83 @@
             </ul>
         </div>
 
-        <div class="banner">
-            <img src="images/event-page/banner.jpg" alt="banner">
-        </div>
-
-        <div class="event-form">
-            <h2>Create New Event</h2>
-            <form @submit.prevent="createEvent">
-                <label for="org_id">Organization ID:</label>
-                <input type="number" v-model="newEvent.org_id" required>
-
-                <label for="title">Title:</label>
-                <input type="text" v-model="newEvent.title" required>
-
-                <label for="description">Description:</label>
-                <textarea v-model="newEvent.description" required></textarea>
-
-                <label for="event_date">Event Date:</label>
-                <input type="date" v-model="newEvent.event_date" required>
-
-                <button type="submit">Create Event</button>
-            </form>
-        </div>
-
-        <div class="upcoming-events">
-            <div class="search-bar">
-                <input type="text" placeholder="Search for events">
-                <button type="button">Search</button>
-            </div>
-            <hr>
-
-            <div class="heading-text">
-                <h1>UPCOMING AUSTRALIA WIDE EVENTS</h1>
-            </div>
-
-            <div class="card-section-events">
-                <div class="card" v-for="event in events" :key="event.event_id">
-                    <img :src="event.image || 'images/event-page/default.jpg'" alt="Event Image">
-                    <p>{{ event.title }}</p>
-                    <p>{{ event.description }}</p>
-                    <p>{{ event.event_date }}</p>
-                    <button type="button">Learn More</button>
+        <main>
+            <section class="event-detail-hero">
+                <div class="events-hero-copy">
+                    <p class="eyebrow">Upcoming events</p>
+                    <h1>Choose a hands-on marine action day.</h1>
+                    <p>Search the calendar for cleanup, wildlife care, reef restoration, and education events. Each listing is designed to make joining simple.</p>
                 </div>
-            </div>
-        </div>
+                <div class="event-spotlight">
+                    <img src="images/event-page/upcoming_event2.jpg" alt="Volunteers preparing for a marine conservation event">
+                    <div>
+                        <span>Next featured event</span>
+                        <strong>Adelaide Shoreline Reset</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="event-search-panel" aria-label="Search upcoming events">
+                <div class="search-bar">
+                    <input type="search" v-model="searchTerm" placeholder="Search by title, location, or focus">
+                    <button type="button">Search</button>
+                </div>
+            </section>
+
+            <section class="event-card-grid" aria-labelledby="upcoming-events-heading">
+                <div class="section-intro">
+                    <p class="eyebrow">Calendar</p>
+                    <h2 id="upcoming-events-heading">Upcoming Australia-wide events</h2>
+                </div>
+
+                <article class="event-feature-card" v-for="event in filteredEvents" :key="event.event_id">
+                    <img :src="event.image || 'images/event-page/upcoming_event1.jpg'" :alt="event.title">
+                    <div class="event-feature-content">
+                        <div class="event-meta">
+                            <span>{{ event.location || 'Australia' }}</span>
+                            <span>{{ event.category || 'Volunteer' }}</span>
+                        </div>
+                        <h3>{{ event.title }}</h3>
+                        <p>{{ event.description }}</p>
+                        <small>{{ formatDate(event.event_date) }}</small>
+                    </div>
+                </article>
+            </section>
+
+            <section class="event-form" id="create-event">
+                <div class="section-intro">
+                    <p class="eyebrow">Host an event</p>
+                    <h2>Create a community event</h2>
+                    <p>Use this form for local cleanup, restoration, education, and support activities.</p>
+                </div>
+                <form @submit.prevent="createEvent">
+                    <label for="org_id">Organization ID</label>
+                    <input id="org_id" type="number" v-model="newEvent.org_id" required>
+
+                    <label for="title">Title</label>
+                    <input id="title" type="text" v-model="newEvent.title" required>
+
+                    <label for="description">Description</label>
+                    <textarea id="description" v-model="newEvent.description" required></textarea>
+
+                    <label for="event_date">Event date</label>
+                    <input id="event_date" type="date" v-model="newEvent.event_date" required>
+
+                    <button type="submit">Create event</button>
+                </form>
+            </section>
+        </main>
 
         <footer>
             <div class="footer-section">
                 <div class="contact-us">
                     <h1>Contact Us</h1>
-                    <p>📞 08 8231 6931</p>
-                    <p>📧 North Terrace, Adelaide</p>
+                    <p>08 8231 6931</p>
+                    <p>North Terrace, Adelaide</p>
                 </div>
 
                 <div class="brand">
-                    <img class="logo" src="images/main-page/logo-placeholder.png" alt="Logo">
+                    <img class="logo" src="images/main-page/MarineVolunteering.jpg" alt="Tidekeepers Collective logo">
                     <div class="social-media">
                         <img src="images/main-page/facebook-log-in.png" alt="Facebook Icon">
                         <img src="images/main-page/x-logo.png" alt="Twitter Icon">
@@ -104,5 +115,7 @@
         </footer>
     </div>
     <script src="javascripts/events.js" defer></script>
+    <script src="javascripts/site-effects.js"></script>
+
 </body>
 </html>

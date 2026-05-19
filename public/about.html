@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
+    <title>About Tidekeepers Collective</title>
     <link rel="stylesheet" href="stylesheets/about.css">
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -16,7 +16,7 @@
 
         <div class="sticky-nav">
             <div class="logo">
-                <a href="index.html"><img src="images/main-page/logo-placeholder.png" alt="AMAF Brand Logo"></a>
+                <a href="index.html"><img src="images/main-page/MarineVolunteering.jpg" alt="Tidekeepers Collective logo"></a>
             </div>
             <div id="menu-toggle" class="menu-toggle"  @click="toggleMenu">
                 <span></span>
@@ -36,27 +36,25 @@
 
             <div class="mission">
                 <div class="mission-image">
-                    <img src="images/about-us/about-us-mission-img.jpg" alt="Image Description">
+                    <img src="images/about-us/about-us-mission-img.jpg" alt="Marine conservation team working near the coast">
                 </div>
                 <div class="mission-text">
-                    <h1>About our mission!</h1>
+                    <h1>Built for practical marine conservation.</h1>
                     <p>{{ mission }} </p>
                 </div>
             </div>
 
             <div class="section-block">
                 <div class="section-block-2">
-                    <h1>Meet the team!</h1>
+                    <h1>Meet the team</h1>
                 </div>
             </div>
 
             <article>
                 <div v-for="member in team" :key="member.id" class="team-member">
-                    <img :src="member.photo" :alt="member.name">
                     <div class="imp">
                         <h3>{{ member.name }}</h3>
                         <p class="role">{{ member.role }}</p>
-
                     </div>
                     <p>{{ member.bio }}</p>
                 </div>
@@ -65,8 +63,10 @@
         </section>
 
     </div>
-
+    <script src="javascripts/navigation.js"></script>
     <script src="javascripts/about.js" type="module"></script>
+    <script src="javascripts/site-effects.js"></script>
+
 
 </body>
 </html>
