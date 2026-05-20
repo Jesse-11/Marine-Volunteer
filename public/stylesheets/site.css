@@ -1434,7 +1434,6 @@ th {
     }
 }
 
-.cta,
 .mission,
 .banner,
 .card,
@@ -1449,7 +1448,6 @@ th {
     animation: riseIn 520ms ease both;
 }
 
-.cta-image,
 .mission-image {
     animation: floatSoft 7s ease-in-out infinite;
 }
