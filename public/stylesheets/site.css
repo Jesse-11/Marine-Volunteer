@@ -1448,10 +1448,6 @@ th {
     animation: riseIn 520ms ease both;
 }
 
-.mission-image {
-    animation: floatSoft 7s ease-in-out infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
